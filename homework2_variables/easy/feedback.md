@@ -1,0 +1,1 @@
+In problem 3 "even and odd", when I tried to sum the even and odd positions that I coded as a, b, c.. etc, I had to look for a second to check if I'm getting the right numbers / positions to add. A better solution suggested by the instructor is to use variable names such as odd1, even1, odd2, ..etc which makes it easier to do the addition by just grouping odds and evens together.
