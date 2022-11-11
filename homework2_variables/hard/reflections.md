@@ -1,0 +1,3 @@
+The first problem (swapping 3 numbers) was rather easy. It's similar to swapping two numbers by using a tmp (empty container).
+
+The second problem (print me) makes us think about conditionals (if / else). When we don't have conditionals yet we can tranlate the process of choosing one path / decision over others to that decision getting 1 and other getting 0. The solution therefore lies in finding a formula to encode that such that we have decisions X & Y and 0 * X + 1 * Y means Y gets executed - and vice versa. 
