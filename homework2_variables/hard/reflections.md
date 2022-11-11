@@ -1,3 +1,5 @@
 The first problem (swapping 3 numbers) was rather easy. It's similar to swapping two numbers by using a tmp (empty container).
 
-The second problem (print me) makes us think about conditionals (if / else). When we don't have conditionals yet we can tranlate the process of choosing one path / decision over others to that decision getting 1 and other getting 0. The solution therefore lies in finding a formula to encode that such that we have decisions X & Y and 0 * X + 1 * Y means Y gets executed - and vice versa. 
+The second problem (print me) makes us think about conditionals (if / else). When we don't have conditionals yet we can tranlate the process of choosing one path / decision over others to that decision getting 1 and other getting 0. The solution therefore lies in finding a formula to encode that such that we have decisions X & Y and 0 * X + 1 * Y means Y gets executed - and vice versa.
+
+The final problem (summing numbers from 1 to N) makes us think about how we could do things without loops. If we had loops, we could simply run it to add numbers from 1 to N. That will be in-efficient if we compare it to how we executed it using a math formula we invented for the solution (which I believe Gauss did hundreds of years ago as a young student).
