@@ -4,7 +4,7 @@ using namespace std;
 // Initialize patient database
 // 20 specializations X 5 slots X 2 entries (name and status)
 string patients_arr[20][5][2];
-int count[20];
+int count_arr[20];
 
 int menu()
 {
@@ -49,7 +49,7 @@ void add_new()
             break;
         }
     }
-    
+    count_arr[speciality] += 1;
 
     // Now check if regular or urgent
     if(status == "0")
@@ -89,7 +89,7 @@ void print_all()
     {
         if(patients_arr[i][0][0] != "empty")
         {
-            cout << "Patients in specialization " << i << " are:\n";
+            cout << "There are "<< count_arr[i] << " patients in specialization " << i << " are:\n";
             for(int j = 0; j < 5; j++)
             {
                 if(patients_arr[i][j][0] != "empty")
@@ -120,6 +120,7 @@ void get_next()
         // get the name of the patient in slot 0
         string name = patients_arr[speciality][0][0];
         cout << name << " please go with the Dr\n";
+        count_arr[speciality] -=1;
         // shift everyone else to the left
         for(int j = 1; j < 5; j++)
         {
@@ -139,6 +140,10 @@ int main()
     for(int j = 0; j < 5; j++)
         for(int k = 0; k < 2; k++)
             patients_arr[i][j][k] = "empty";
+
+    // Populate count database with zeros
+    for(int i = 0; i < 20; i++)
+        count_arr[i] = 0;
 
     // Keep running forever
     while(true)
