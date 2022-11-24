@@ -36,19 +36,46 @@ void add_new()
 
     for(int j = 0; j < 5; j++)
     {
-        if (patients_arr[speciality][j][0] == "empty")
+        if(j == 4 && patients_arr[speciality][j][0] != "empty")
+        {
+            cout << "Sorry, we can't add more patients to this speciality\n";
+            return;
+        }
+        else if (patients_arr[speciality][j][0] == "empty")
         {
             cout << "Empty slot num: " << j << endl;
             empty_slot = j;
             break;
         }
-        else
+    }
+    
+
+    // Now check if regular or urgent
+    if(status == "0")
+    {
+        patients_arr[speciality][empty_slot][0] = name;
+        patients_arr[speciality][empty_slot][1] = status;
+    }
+    else if(status == "1")
+    {
+        // if slot 0 is not empty,shift everyone else 1 position to empty first slot
+        if(!(patients_arr[speciality][0][0] == "empty"))
         {
-            cout << "Sorry, we can't add more patients to this speciality\n";
-            return;
+            for(int i = 3; i >= 0; i--)
+            {
+                patients_arr[speciality][i+1][0] = patients_arr[speciality][i][0];
+                patients_arr[speciality][i+1][1] = patients_arr[speciality][i][1];
+            }
+
         }
+        // Place urgent patient in empty slot
+        patients_arr[speciality][0][0] = name;
+        patients_arr[speciality][0][1] = status; 
     }
 
+    // for debugging - check if could add patients correctly
+    for(int j = 0; j < 5; j++)
+        cout << "Slot " << j << " has " << patients_arr[speciality][j][0] << endl;
     return;
 }
 
