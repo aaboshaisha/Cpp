@@ -4,6 +4,7 @@ using namespace std;
 // Initialize patient database
 // 20 specializations X 5 slots X 2 entries (name and status)
 string patients_arr[20][5][2];
+int count[20];
 
 int menu()
 {
@@ -74,9 +75,32 @@ void add_new()
     }
 }
 
+string decode_status(string status)
+{
+    if(status == "0")
+        return "Regular";
+    else
+        return "Urgent";
+}
+
 void print_all()
 {
-    cout << "Printing all patients\n";
+    for(int i = 0; i < 20; i++)
+    {
+        if(patients_arr[i][0][0] != "empty")
+        {
+            cout << "Patients in specialization " << i << " are:\n";
+            for(int j = 0; j < 5; j++)
+            {
+                if(patients_arr[i][j][0] != "empty")
+                {
+                    string name = patients_arr[i][j][0];
+                    string status = decode_status(patients_arr[i][j][1]);
+                    cout << name << " " << status << endl;
+                }
+            }
+        }
+    }
     return;
 }
 
@@ -104,11 +128,6 @@ void get_next()
         }
         return; 
     }
-
-    // for debugging - check if could add patients correctly
-    for(int j = 0; j < 5; j++)
-        cout << "Slot " << j << " has " << patients_arr[speciality][j][0] << endl;
-    return;
 }
 
 
