@@ -72,11 +72,6 @@ void add_new()
         patients_arr[speciality][0][0] = name;
         patients_arr[speciality][0][1] = status; 
     }
-
-    // for debugging - check if could add patients correctly
-    for(int j = 0; j < 5; j++)
-        cout << "Slot " << j << " has " << patients_arr[speciality][j][0] << endl;
-    return;
 }
 
 void print_all()
@@ -87,7 +82,32 @@ void print_all()
 
 void get_next()
 {
-    cout << "Getting next patient\n";
+    cout << "Enter speciality: ";
+    int speciality;
+    cin >> speciality;
+
+    if(patients_arr[speciality][0][0] == "empty")
+    {
+        cout << "No patients at the moment. Have a rest Dr\n";
+        return;
+    }
+    else
+    {
+        // get the name of the patient in slot 0
+        string name = patients_arr[speciality][0][0];
+        cout << name << " please go with the Dr\n";
+        // shift everyone else to the left
+        for(int j = 1; j < 5; j++)
+        {
+            patients_arr[speciality][j-1][0] = patients_arr[speciality][j][0];
+            patients_arr[speciality][j-1][1] = patients_arr[speciality][j][1];
+        }
+        return; 
+    }
+
+    // for debugging - check if could add patients correctly
+    for(int j = 0; j < 5; j++)
+        cout << "Slot " << j << " has " << patients_arr[speciality][j][0] << endl;
     return;
 }
 
