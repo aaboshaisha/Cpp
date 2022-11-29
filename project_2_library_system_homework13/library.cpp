@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 
@@ -42,12 +43,36 @@ struct book
     string borrowed_by[10];
 };
 
-struct books_books_database
+// Functions to compare books based on name and id
+bool compare_name(book a, book b)
+{
+    if(a.name < b.name)
+        return 1;
+    else
+        return 0;
+}
+
+bool compare_id(book a, book b)
+{
+    if(a.id < b.id)
+        return 1;
+    else
+        return 0;
+}
+
+struct shelf
 {
     book books_list[100];
+    int len;
 
     void add_book()
     {
+        cout << "Enter book info: id, name and total quantity: ";
+        book new_book;
+        cin >> new_book.id >> new_book.name >> new_book.quantity;
+        books_list[len] = new_book;
+        cout << "Added book: " << books_list[len].name << endl;
+        len++;
         return;
     }
 
@@ -56,8 +81,15 @@ struct books_books_database
         return;
     }
 
-    void list_books()
+    void list_books(int c)
     {
+        if(c == 0)   
+            sort(books_list, books_list + len, compare_name);
+        else if (c == 1)
+            sort(books_list, books_list + len, compare_id);
+        
+        for (int i = 0; i < len; i++)
+            cout << "id: " << books_list[i].id << " name: " << books_list[i].name << " quantity: " << books_list[i].quantity << endl;
         return;
     }
 
@@ -107,6 +139,7 @@ void menu()
     while(true)
     {
         int choice = display_and_get_choices();
+        int c;
 
         if(choice == 1)
             books_database.add_book();
@@ -115,9 +148,9 @@ void menu()
         else if(choice == 3)
             books_database.list_borrowed();
         else if(choice == 4)
-            books_database.list_books();
+            books_database.list_books(c=0);
         else if(choice == 5)
-            books_database.list_books();
+            books_database.list_books(c=1);
         else if(choice == 6)
             users_database.add_user();
         else if(choice == 7)
@@ -137,5 +170,6 @@ void menu()
 int main()
 {
     
+    menu();    
     return 0;
 }
