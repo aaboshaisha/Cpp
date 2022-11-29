@@ -60,6 +60,19 @@ bool compare_id(book a, book b)
         return 0;
 }
 
+bool is_prefix(string input, string prefix)
+{
+    if(prefix.size() > input.size())
+        return 0;
+    
+    for(int i = 0; i < prefix.size(); i++)
+    {
+        if(prefix[i] != input[i])
+            return 0;
+    }
+    return 1;
+}
+
 struct shelf
 {
     book books_list[100];
@@ -78,6 +91,15 @@ struct shelf
 
     void search()
     {
+        string prefix;
+        cout << "Enter book's name / prefix: ";
+        cin >> prefix;
+
+        for(int i = 0; i < len; i++)
+        {
+            if(is_prefix(books_list[i].name, prefix))
+                cout << books_list[i].name << endl;
+        }
         return;
     }
 
@@ -148,9 +170,9 @@ void menu()
         else if(choice == 3)
             books_database.list_borrowed();
         else if(choice == 4)
-            books_database.list_books(c=0);
-        else if(choice == 5)
             books_database.list_books(c=1);
+        else if(choice == 5)
+            books_database.list_books(c=0);
         else if(choice == 6)
             users_database.add_user();
         else if(choice == 7)
@@ -168,8 +190,7 @@ void menu()
 
 
 int main()
-{
-    
+{  
     menu();    
     return 0;
 }
