@@ -143,18 +143,15 @@ struct users
         for(int i = 0; i < books_database.len;i++)
         {
             book book_to_borrow = books_database.books_list[i];
-            cout << book_to_borrow.name << endl;
             
             if(book_to_borrow.name == bookname)
             {
                 if(book_to_borrow.quantity > 0)
                 {
-                    cout << "Quantity available: " << book_to_borrow.quantity << "\n";
-                    
                     int cnt = book_to_borrow.borrowed_count;
                     books_database.books_list[i].borrowed_by[cnt] = username;
-                    cout << books_database.books_list[i].borrowed_by[cnt] << endl;
                     books_database.books_list[i].borrowed_count++;
+                    books_database.books_list[i].quantity--;
                     return;
                     
                 }
@@ -171,6 +168,33 @@ struct users
 
     void return_book()
     {
+        cout << "Enter username and book name: ";
+        string username, bookname;
+        cin >> username >> bookname;
+
+        // Search the book database
+        for(int i = 0; i < books_database.len; i++)
+        {
+            // find the book
+            if(books_database.books_list[i].name == bookname)
+            {
+                // find the user who borrowed it
+                int count = books_database.books_list[i].borrowed_count;
+                for(int j = 0; j < count ; j++)
+                {
+                    if(books_database.books_list[i].borrowed_by[j] == username)
+                    {
+                        int start_shift = j;
+                        for(int k = start_shift ; k < count; k++)
+                        {
+                            books_database.books_list[i].borrowed_by[k] = books_database.books_list[i].borrowed_by[k+1]; 
+                        }
+                    }
+                }
+                books_database.books_list[i].borrowed_count--; 
+                books_database.books_list[i].quantity++;
+            }
+        }
         return;
     }
 
