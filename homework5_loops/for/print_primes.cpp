@@ -9,12 +9,9 @@ int main()
     // go through numbers 2 to n
     for (int i = 2; i <= n; i++)
     {
-        //cout << "i = " << i << "\n";
         // see if they are prime
         for (int j = 2; j <= i; j++)
         {
-            //cout << "j = " << j << "\n";
-            
             if (i % j == 0 && i != j)
             {
                 is_prime = false;

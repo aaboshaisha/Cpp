@@ -4,10 +4,9 @@ using namespace std;
 ////////////////////BOOKS
 struct book
 {
-    int id, quantity;
+    int id, quantity, borrowed_count;
     string name;
     string borrowed_by[50];
-    int borrowed_count;
 };
 
 // Functions to compare books based on name and id
