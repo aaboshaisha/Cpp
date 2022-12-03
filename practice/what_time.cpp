@@ -21,7 +21,7 @@ must be checked in the order below.
     - If a string does not contain two numerical fields separated by a colon
     (eg "10:06" or "17:10", but not "6" or "10:"), 
     throw std::domain_error (NOT std::invalid_argument).
-    - If hour is not i . the range 0 - 23 or the minute is not in the range
+    - If hour is not in the range 0 - 23 or the minute is not in the range
     0 - 59, throw std::out_of_range
 
     (For this exercise, assume that if std::stoi finished successfully, 
@@ -48,12 +48,25 @@ TimeOfDay parse_time( std::string input){
             before_colon += c;
         }
     }
-    std::cout << "Before: " << before_colon << std::endl;
-    std::cout << "After: " << after_colon << std::endl;
+    //std::cout << "Before: " << before_colon << std::endl;
+    //std::cout << "After: " << after_colon << std::endl;
+
+    
+
 
     TimeOfDay the_time {};
-    the_time.hour = std::stoi(before_colon);
-    the_time.minute = std::stoi(after_colon);
+    try{
+        the_time.hour = std::stoi(before_colon);
+        the_time.minute = std::stoi(after_colon);
+    }catch (std::invalid_argument &e){
+        throw std::domain_error {"Invalid Time"};
+        std::cout << std::endl;
+    }
+
+    if (0 < the_time.hour || the_time.hour > 23 || the_time.minute < 0 || the_time.minute > 59){
+        throw std::out_of_range {"Invalid time"};
+    }
+    
 
     return the_time;
 
@@ -68,10 +81,17 @@ int main(){
     std::cout << "You entred " << input_string << std::endl;
 
     // Task: Handle the error cases
-    TimeOfDay T { parse_time(input_string) };
-    std::cout << "The time is ";
-    print_time(T);
-    std::cout << std::endl;
+    try{
+        TimeOfDay T { parse_time(input_string) };
+        std::cout << "The time is ";
+        print_time(T);
+        std::cout << std::endl;
+    }catch (std::domain_error &e){
+        std::cout << "string does not contain two numerical fields separated by a colon" << std::endl;
+    }catch (std::out_of_range &e){
+        std::cout << "Hours or Minutes not in range" << std::endl;
+    }
+    
 
     return 0;
 }
