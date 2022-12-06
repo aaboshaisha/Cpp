@@ -4,19 +4,15 @@
 struct stack{
     std::queue<int> q;
 
-    void reverse_queue(std::queue<int> &q){
-    if(q.size() == 1){
-        return;
-    }
-    int fr = q.front();
-    q.pop();
-    reverse_queue(q);
-    q.push(fr);
-    }
-
     void push(int val){
+        int size {(int) q.size()};
         q.push(val);
-        reverse_queue(q);
+        while(size){
+            q.push(q.front());
+            q.pop();
+            size--;
+        }
+        
     }
 
     void pop(){
